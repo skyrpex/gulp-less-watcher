@@ -1,0 +1,40 @@
+{
+  "name": "gulp-less-watcher",
+  "version": "0.1.0",
+  "description": "Watches Less files (and imports) using an endless streaming interface (and generates sourcemaps)",
+  "main": "lib/index.js",
+  "keywords": [
+    "gulpplugin",
+    "gulp",
+    "less",
+    "watch",
+    "sourcemap"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/skyrpex/gulp-less-watcher.git"
+  },
+  "scripts": {
+    "clean": "rimraf lib/ && mkdirp lib/",
+    "build": "babel src/ --out-dir lib/",
+    "watch": "npm run build -- --watch",
+    "prepublish": "npm run clean && npm run build"
+  },
+  "dependencies": {
+    "accord": "^0.20.1",
+    "deepmerge": "^0.2.10",
+    "gaze": "^0.5.1",
+    "gulp-util": "^3.0.6",
+    "less": "^2.5.1",
+    "through2": "^2.0.0",
+    "vinyl": "^0.5.0",
+    "vinyl-sourcemaps-apply": "^0.1.4"
+  },
+  "devDependencies": {
+    "babel": "^5.8.19",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.4.2"
+  },
+  "author": "Cristian Pallarés <me@cpallares.com> (www.cpallares.com)",
+  "license": "ISC"
+}
