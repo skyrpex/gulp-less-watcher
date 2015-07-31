@@ -17,10 +17,12 @@ const config = {
   // Less config...
 };
 
-return gulp.src('main.less', { cwd: 'resources/assets/styles/' })
-  .pipe($.lessWatcher(config))
-  .pipe($.sourcemaps.init())
-  .pipe($.less(config))
-  .pipe($.sourcemaps.write('./', { includeContent: true }))
-  .pipe(gulp.dest('public/assets/'));
+gulp.task('default', () => {
+  return gulp.src('main.less', { cwd: 'resources/assets/styles/' })
+    .pipe($.lessWatcher(config))
+    .pipe($.sourcemaps.init())
+    .pipe($.less(config))
+    .pipe($.sourcemaps.write('./', { includeContent: true }))
+    .pipe(gulp.dest('public/assets/'));
+});
 ```
