@@ -40,6 +40,7 @@ export default (options = {}) => {
 
       less.render(contents.toString(), merge(options, { filename })).then(({imports}) => {
 
+        // TODO filter node_modules
         watch(imports).on('all', () => {
           scan();
         });
