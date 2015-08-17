@@ -7,7 +7,6 @@ import util     from 'gulp-util';
 import merge    from 'deepmerge';
 
 import create        from './createError';
-import handleError   from './handleError';
 import createWatcher from './createWatcher';
 
 const {log} = util;
@@ -30,22 +29,28 @@ export default (options = {}) => {
     const scan = () => {
 
       const contents = fs.readFileSync(filename);
-
-      this.push(new File({
-        contents,
-        cwd: file.cwd,
-        base: file.base,
-        path: file.path,
-      }));
-
       less.render(contents.toString(), merge(options, { filename })).then(({imports}) => {
+
+        this.push(new File({
+          contents,
+          cwd: file.cwd,
+          base: file.base,
+          path: file.path,
+        }));
 
         // TODO filter node_modules
         watch(imports).on('all', () => {
           scan();
         });
 
-      }).catch(handleError);
+      }).catch(err => {
+
+        this.emit('error', createError(err));
+        watch(filename).on('all', () => {
+          scan();
+        });
+
+      });
 
     };
 
