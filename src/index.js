@@ -6,7 +6,7 @@ import through2 from 'through2';
 import util     from 'gulp-util';
 import merge    from 'deepmerge';
 
-import create        from './createError';
+import createError   from './createError';
 import createWatcher from './createWatcher';
 
 const {log} = util;

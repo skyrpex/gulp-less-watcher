@@ -1,6 +1,6 @@
 {
   "name": "gulp-less-watcher",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Watches Less files (and imports) using an endless streaming interface (and generates sourcemaps)",
   "main": "lib/index.js",
   "keywords": [
