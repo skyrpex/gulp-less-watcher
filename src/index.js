@@ -13,7 +13,6 @@ const {log} = util;
 const less  = accord.load('less');
 
 export default (options = {}) => {
-
   return through2.obj(function(file, enc, cb) {
     if (file.isNull()) {
       return cb(null, file);
@@ -27,7 +26,6 @@ export default (options = {}) => {
     const watch    = createWatcher(filename);
 
     const scan = () => {
-
       const contents = fs.readFileSync(filename);
       less.render(contents.toString(), merge(options, { filename })).then(({imports}) => {
 
@@ -38,23 +36,13 @@ export default (options = {}) => {
           path: file.path,
         }));
 
-        // TODO filter node_modules
-        watch(imports).on('all', () => {
-          scan();
-        });
+        // Filter node_modules imports.
+        imports = imports.filter(filename => !filename.match(/node_modules/));
+        watch(imports).on('all', scan);
 
-      }).catch(err => {
-
-        this.emit('error', createError(err));
-        watch(filename).on('all', () => {
-          scan();
-        });
-
-      });
-
+      }).catch(err => this.emit('error', createError(err)));
     };
 
     scan();
   });
-
 };
