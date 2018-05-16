@@ -1,3 +1,5 @@
+> WARNING! This project is not maintained anymore.
+
 # Gulp Less Watcher
 
 Watches Less files (and imports) using an endless streaming interface (and generates sourcemaps).
